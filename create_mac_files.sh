@@ -3,10 +3,12 @@
 # Change directory to your repository
 cd ~/Documents/cj_tests/chatGPT_GUI
 
+
 # Pull the latest changes from origin
 git pull origin
 
 # Run the npm script "make"
+npm update
 npm run make
 
 # Add all changes to the staging area
