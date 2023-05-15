@@ -19,3 +19,7 @@ git commit -m "creating mac executable"
 
 # Push the changes to origin
 git push origin
+
+cls
+
+echo "Mac files created \n\n Pa-upload nung out folder sa https://drive.google.com/drive/folders/1mzlPJoYKGb6HElIGXrmO7JkoNkVeMNmw?usp=sharing"
