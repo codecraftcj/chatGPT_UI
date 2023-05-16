@@ -1,8 +1,22 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron')
+
+const { app, BrowserWindow } = require('electron');
+
 const path = require('path')
+
+const env = process.env.NODE_ENV || 'development';
+
+// If development environment
+if (env === 'development') {
+  try {
+    require('electron-reloader')(module, {
+        debug: true,
+        watchRenderer: true
+    });
+} catch (_) { console.log('Error'); }  
+}
 
 const createWindow = () => {
   // Create the browser window.

@@ -25,7 +25,10 @@
     "@electron-forge/maker-rpm": "^6.1.1",
     "@electron-forge/maker-squirrel": "^6.1.1",
     "@electron-forge/maker-zip": "^6.1.1",
-    "electron": "^24.3.0"
+    "electron": "^24.3.0",
+    "electron-reload": "^2.0.0-alpha.1",
+    "electron-reloader": "^1.2.3",
+    "tailwindcss": "^3.3.2"
   },
   "dependencies": {
     "@electron-forge/maker-dmg": "^6.1.1",
