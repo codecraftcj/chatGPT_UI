@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Change directory to your repository
-cd ~/Documents/cj_tests/chatGPT_GUI
-
 
 # Pull the latest changes from origin
 git pull origin
