@@ -32,6 +32,8 @@
   },
   "dependencies": {
     "@electron-forge/maker-dmg": "^6.1.1",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "npm": "^9.6.7",
+    "python-shell": "^5.0.0"
   }
 }

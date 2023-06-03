@@ -2,12 +2,15 @@
 
 // Modules to control application life and create native browser window
 
-const { app, BrowserWindow } = require('electron');
-
+const { app, BrowserWindow, ipcMain } = require('electron');
+const {PythonShell} = require("python-shell")
 const path = require('path')
 
 const env = process.env.NODE_ENV || 'development';
+const pyshell = new PythonShell("script.py")
 
+
+    
 // If development environment
 if (env === 'development') {
   try {
@@ -17,6 +20,14 @@ if (env === 'development') {
     });
 } catch (_) { console.log('Error'); }  
 }
+const handleSetTitle = (event, title) => {
+  const webContents = event.sender
+  const win = BrowserWindow.fromWebContents(webContents)
+  win.setTitle(title)
+  console.log(title)
+  win.webContents.executeJavaScript(`console.log('${title}')`)
+}
+
 
 const createWindow = () => {
   // Create the browser window.
@@ -32,15 +43,29 @@ const createWindow = () => {
   mainWindow.loadFile('index.html')
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+  ipcMain.on('set-title', handleSetTitle)
+  ipcMain.on("run-python",(event,func_message) => {
+    const webContents = event.sender
+    const win = BrowserWindow.fromWebContents(webContents)
+    pyshell.send(func_message);
+    
+    pyshell.on('message', function (message) {
+        // received a message sent from the Python script (a simple "print" statement)
+        console.log(message);
+        win.webContents.executeJavaScript(`console.log('${message}')`)
+    });
+  })
   createWindow()
-
+  
   app.on('activate', () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
